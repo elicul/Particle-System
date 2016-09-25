@@ -1,0 +1,57 @@
+Brzina Renderiranja
+
+Još u samim početcima ovog rada spomenuli smo i opisali što je to renderiranje, a u ovom poglavlju bavit ćemo se pitanjima kako mjeriti brzinu renderiranje i zašto nam je brzina renderiranje važna. Većina ljudi danas renderiranje mjeri pomoću FPS-ova (eng. Frames Per Second), no FPS.ovi nisu uvijek najbolji način za mjerenje performansi jer nisu linearni u vremenskoj domeni. Bolje je izmjeriti takozvani vremenski okvir (.eng frame time), koji je inverzija FPS-ova. Dakle ako su FPS-ovi jednaki 25, vremenski okvir iznosi 1/25 = 0.04 sekundi. 
+
+Problem FPS-ova objasnit ćemo u sljedećem primjeru: 
+
+Recimo da renderiramo brzinom od 180 FPS-ova. Sada ćemo dodati još par čestica za renderiranje da se naši FPS-ovi smanje na 160. Koliko je zapravo loše to? Izgubili smo 20 FPS-ova, ali koliko je sada sekundi više potrebno prilikom renderiranja? 1/180 - 1/160 = 0.00069 sekundi
+
+Pretpostavimo sada da su naši FPS-ovi jednaki 60 i dodajemo čestice za renderiranje dok FPS-ovi ne padnu na 40. Koliko je to loše? 1/60 - 1/40 = 0.00833 sekundi. Iako su FPS-ovi u oba slučaja pali za 20, usporavanje u prvom slučaju nije jako veliko, ali je zato u kasnijem slučaju osjetno veći.
+
+Za mjerenje brzine renderiranja u našem primjeru koristit ćemo se FPS-ovima i na temelju njih ćemo kasnije izračunati vremenski okvir. Za mjerenje FPS-ova koristit ćemo se sljedećim kodom.
+
+/*kod*/
+
+Iako ovo nije najispravniji nači za mjerenje performansi našeg programa, nama će biti dovoljno dobar za dobiti dojam o tome koliko količina naših čestica djeluje na vrijeme renderiranja. 
+
+Prilikom provedenih testiranja programa dobiveni su sljedeći rezultati renderiranja.
+
+/*TABLICA*/
+/*GRAF*/
+
+Korištena konfiguracija prilikom renderiranja:
+
+H/W path        Device      Class          Description
+======================================================
+                            system         HP Pavilion dv6 Notebook PC (A2X59EA#ABZ)
+/0                          bus            3388
+/0/0                        memory         1MiB BIOS
+/0/11                       memory         8GiB System Memory
+/0/11/0                     memory         4GiB SODIMM DDR3 Synchronous 1333 MHz (0,8 ns)
+/0/11/1                     memory         4GiB SODIMM DDR3 Synchronous 1333 MHz (0,8 ns)
+/0/1b                       processor      Intel(R) Core(TM) i7-2670QM CPU @ 2.20GHz
+/0/1b/1d                    memory         32KiB L1 cache
+/0/1b/1e                    memory         256KiB L2 cache
+/0/1b/1f                    memory         6MiB L3 cache
+/0/1c                       memory         32KiB L1 cache
+/0/100                      bridge         2nd Generation Core Processor Family DRAM Controller
+/0/100/1                    bridge         Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port
+/0/100/1/0                  display        Whistler [Radeon HD 6730M/6770M/7690M XT]
+/0/100/2                    display        2nd Generation Core Processor Family Integrated Graphics Controller
+/0/100/16                   communication  6 Series/C200 Series Chipset Family MEI Controller #1
+/0/100/1a                   bus            6 Series/C200 Series Chipset Family USB Enhanced Host Controller #2
+/0/100/1b                   multimedia     6 Series/C200 Series Chipset Family High Definition Audio Controller
+/0/100/1c                   bridge         6 Series/C200 Series Chipset Family PCI Express Root Port 1
+/0/100/1c/0     eth0        network        RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller
+/0/100/1c.1                 bridge         6 Series/C200 Series Chipset Family PCI Express Root Port 2
+/0/100/1c.1/0   wlan0       network        BCM4313 802.11bgn Wireless Network Adapter
+/0/100/1c.2                 bridge         6 Series/C200 Series Chipset Family PCI Express Root Port 3
+/0/100/1c.2/0               generic        RTS5209 PCI Express Card Reader
+/0/100/1c.3                 bridge         6 Series/C200 Series Chipset Family PCI Express Root Port 4
+/0/100/1c.3/0               bus            uPD720200 USB 3.0 Host Controller
+/0/100/1d                   bus            6 Series/C200 Series Chipset Family USB Enhanced Host Controller #1
+/0/100/1f                   bridge         HM65 Express Chipset Family LPC Controller
+/0/100/1f.2                 storage        6 Series/C200 Series Chipset Family 6 port SATA AHCI Controller
+/0/100/1f.3                 bus            6 Series/C200 Series Chipset Family SMBus Controller
+/0/1            scsi0       storage        
+/0/1/0.0.0      /dev/sda    disk           250GB Samsung SSD 840
